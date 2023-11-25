@@ -386,7 +386,7 @@ function man(x, y) {
   _v1.push(_ban.getStr(1));
   _v2.push(_ban.getStr(2));
   won = _ban.fin();
-  mywriteln("eval:" + won);
+  // mywriteln("eval:" + won);
   if (won) {
     mywriteln("You won!!!");
     return;
@@ -402,7 +402,7 @@ function man(x, y) {
   _v1.push(_ban.getStr(1));
   _v2.push(_ban.getStr(2));
   won = _ban.fin();
-  mywriteln("eval:" + won);
+  // mywriteln("eval:" + won);
   if (won) {
     mywriteln("I won!!!");
     return;
