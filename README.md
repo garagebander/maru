@@ -1,0 +1,2 @@
+# maru
+maru-batsu game
