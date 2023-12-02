@@ -150,16 +150,37 @@ function Eval() {
     num = this.etable[str];
     if (this.min > num) this.min = num;
   };
+  this.add = function (str, num) {
+    this.etable[str] = tonum(this.etable[str]) + tonum(num);
+    num = this.etable[str];
+    if (this.max < num) this.max = num;
+    if (this.min > num) this.min = num;
+  };
   this.level = function () {
     return this.max - this.min;
   };
   this.log = function () {
-    var count = 0;
+    var tarray = new Array();
     for (var key in this.etable) {
-      mywriteln(count + ":" + key + "->" + this.etable[key]);
-      count++;
-      if (count > 300) break;
+      tarray.push(key);
     }
+    tarray.sort(function (a, b) {
+      // return tonum(this.etable[b]) - tonum(this.etable[a]);
+      return tonum(tonum(_eval.get(b)) - tonum(_eval.get(a)));
+    });
+    for (var i = 0; i < 50; i++) {
+      mywriteln(tarray[i].substr(0, 3));
+      mywriteln(tarray[i].substr(3, 3));
+      mywriteln(tarray[i].substr(6, 3) + " -> " + this.etable[tarray[i]]);
+      mywriteln("----------------------------");
+    }
+
+    // var count = 0;
+    // for (var key in this.etable) {
+    //   mywriteln(count + ":" + key + "->" + this.etable[key]);
+    //   count++;
+    //   if (count > 300) break;
+    // }
   };
 }
 
@@ -309,11 +330,11 @@ function init() {
   Ban.h = 3;
   Ban.full = Ban.w * Ban.h;
   Ban.l = 3;
-  Ban.t = ["・", "O", "X"];
+  Ban.t = ["・", "Ｏ", "Ｘ"];
   Ban.tt = [
     ["", "", ""],
-    ["・", "O", "X"],
-    ["・", "X", "O"],
+    ["・", "Ｏ", "Ｘ"],
+    ["・", "Ｘ", "Ｏ"],
   ];
 
   // _etable = []; // new Array();
@@ -430,6 +451,12 @@ function man(x, y) {
   // mywriteln("eval:" + won);
   if (won) {
     mywriteln("You won!!!");
+    for (var key in _v1) {
+      _eval.add(_v1[key], Math.floor(_eval.level() / 2));
+    }
+    for (var key in _v2) {
+      _eval.add(_v2[key], Math.floor((0 - _eval.level()) / 2));
+    }
     return;
   }
   if (_ban.isfull()) {
@@ -446,6 +473,12 @@ function man(x, y) {
   // mywriteln("eval:" + won);
   if (won) {
     mywriteln("I won!!!");
+    for (var key in _v1) {
+      _eval.add(_v1[key], Math.floor((0 - _eval.level()) / 2));
+    }
+    for (var key in _v2) {
+      _eval.add(_v2[key], Math.floor(_eval.level() / 2));
+    }
     return;
   }
   if (_ban.isfull()) {
