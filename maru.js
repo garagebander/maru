@@ -124,6 +124,44 @@ function Ban() {
   };
 }
 
+// Evaluate Table <1>が勝ったらプラス評価
+function Eval() {
+  this.etable = []; // new Array();
+  this.min = 0;
+  this.max = 0;
+  this.init = function () {
+    this.etable = []; // new Array();
+  };
+  this.set = function (str, num) {
+    this.etable[str] = tonum(num);
+    if (this.min > num) this.min = num;
+    if (this.max < num) this.max = num;
+  };
+  this.get = function (str) {
+    return tonum(this.etable[str]);
+  };
+  this.inc = function (str) {
+    this.etable[str] = tonum(this.etable[str]) + 1;
+    num = this.etable[str];
+    if (this.max < num) this.max = num;
+  };
+  this.dec = function (str) { 
+    this.etable[str] = tonum(this.etable[str]) - 1;
+    num = this.etable[str]; 
+    if (this.min > num) this.min = num;
+  };
+  this.level = function () {
+    return this.max - this.min; 
+  }
+  this.log = function () {  
+    var count = 0;
+    for (var key in etable) {
+      mywriteln(count + ":" + key + "->" + etable[key]);
+      count++;
+      if (count > 300) break;
+    }
+}
+
 function com0(b, a) {
   if (b.isfull()) {
     mywriteln("Could not set. It's FULL.");
@@ -191,14 +229,15 @@ function com(b, a) {
         var bb = b.copy();
         bb.set(j, i, a);
         s = bb.getStr(a);
-        e = tonum(_etable[s]);
+        // e = tonum(_etable[s]);
+        e = tonum(_eval.get(s));
         if (hit === 0 || e > max) {
           max = e;
           hit = 1;
           x = j;
           y = i;
         } else if (e == max) {
-          hit++;
+          hit++; 
           var on = Math.floor(Math.random() * hit);
           if (on === 0) {
             x = j;
@@ -260,7 +299,10 @@ function comrand(b, a) {
 var _ban;
 var _v1;
 var _v2;
-var _etable = []; // new Array();
+// var _etable = []; // new Array();
+var _eval = new Eval();
+_eval.init();
+
 
 function init() {
   Ban.w = 3;
@@ -274,8 +316,8 @@ function init() {
     ["・", "X", "O"],
   ];
 
-  // Evaluate Table <1>が勝ったらプラス評価
-  _etable = []; // new Array();
+  // _etable = []; // new Array();
+  _eval.init();
 
   start();
 }
@@ -325,34 +367,33 @@ function study() {
 
     if (won == 1) {
       for (var key in v1) {
-        _etable[v1[key]] = tonum(_etable[v1[key]]) + 1;
+        // _etable[v1[key]] = tonum(_etable[v1[key]]) + 1;
+        _eval.inc(table[v1[key]]);
       }
       for (var key in v2) {
-        _etable[v2[key]] = tonum(_etable[v2[key]]) - 1;
+        // _etable[v2[key]] = tonum(_etable[v2[key]]) - 1;
+        _eval.dec(table[v2[key]]);
       }
     }
     if (won == 2) {
       for (var key in v1) {
-        _etable[v1[key]] = tonum(_etable[v1[key]]) - 1;
+        // _etable[v1[key]] = tonum(_etable[v1[key]]) - 1;
+        _eval.dec(table[v1[key]]);
       }
       for (var key in v2) {
-        _etable[v2[key]] = tonum(_etable[v2[key]]) + 1;
+        // _etable[v2[key]] = tonum(_etable[v2[key]]) + 1;
+        _eval.inc(table[v2[key]]);
       }
     }
     // mywriteln("won:" + won);
     // b.list();
   }
 
-  mywriteln("Ready.");
+  mywriteln("Ready. Level:" + _eval.level());
 }
 
 function log_etable() {
-  var count = 0;
-  for (var key in _etable) {
-    mywriteln(count + ":" + key + "->" + _etable[key]);
-    count++;
-    if (count > 300) break;
-  }
+  _eva.log();
 }
 
 function writetable(ban) {
@@ -368,7 +409,7 @@ function writetable(ban) {
 }
 
 function start() {
-  mywrite("");
+  mywrite("Start a game. Level:" + _eval.level());
   _ban = new Ban();
 
   _v1 = new Array();
