@@ -155,8 +155,8 @@ function Eval() {
   };
   this.log = function () {
     var count = 0;
-    for (var key in etable) {
-      mywriteln(count + ":" + key + "->" + etable[key]);
+    for (var key in this.etable) {
+      mywriteln(count + ":" + key + "->" + this.etable[key]);
       count++;
       if (count > 300) break;
     }
@@ -368,21 +368,21 @@ function study() {
     if (won == 1) {
       for (var key in v1) {
         // _etable[v1[key]] = tonum(_etable[v1[key]]) + 1;
-        _eval.inc(table[v1[key]]);
+        _eval.inc(v1[key]);
       }
       for (var key in v2) {
         // _etable[v2[key]] = tonum(_etable[v2[key]]) - 1;
-        _eval.dec(table[v2[key]]);
+        _eval.dec(v2[key]);
       }
     }
     if (won == 2) {
       for (var key in v1) {
         // _etable[v1[key]] = tonum(_etable[v1[key]]) - 1;
-        _eval.dec(table[v1[key]]);
+        _eval.dec(v1[key]);
       }
       for (var key in v2) {
         // _etable[v2[key]] = tonum(_etable[v2[key]]) + 1;
-        _eval.inc(table[v2[key]]);
+        _eval.inc(v2[key]);
       }
     }
     // mywriteln("won:" + won);
@@ -393,7 +393,7 @@ function study() {
 }
 
 function log_etable() {
-  _eva.log();
+  _eval.log();
 }
 
 function writetable(ban) {
