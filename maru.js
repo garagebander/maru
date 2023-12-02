@@ -145,21 +145,22 @@ function Eval() {
     num = this.etable[str];
     if (this.max < num) this.max = num;
   };
-  this.dec = function (str) { 
+  this.dec = function (str) {
     this.etable[str] = tonum(this.etable[str]) - 1;
-    num = this.etable[str]; 
+    num = this.etable[str];
     if (this.min > num) this.min = num;
   };
   this.level = function () {
-    return this.max - this.min; 
-  }
-  this.log = function () {  
+    return this.max - this.min;
+  };
+  this.log = function () {
     var count = 0;
     for (var key in etable) {
       mywriteln(count + ":" + key + "->" + etable[key]);
       count++;
       if (count > 300) break;
     }
+  };
 }
 
 function com0(b, a) {
@@ -237,7 +238,7 @@ function com(b, a) {
           x = j;
           y = i;
         } else if (e == max) {
-          hit++; 
+          hit++;
           var on = Math.floor(Math.random() * hit);
           if (on === 0) {
             x = j;
@@ -302,7 +303,6 @@ var _v2;
 // var _etable = []; // new Array();
 var _eval = new Eval();
 _eval.init();
-
 
 function init() {
   Ban.w = 3;
