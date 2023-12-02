@@ -1,55 +1,57 @@
 <html>
-<head>
+  <head>
     <title>Home</title>
     <script src="./maru.js"></script>
-</head>    
-<body onload="init();">
+  </head>
+  <body onload="init();">
     <div id="ban" class="table"></div>
-    see <a href="https://github.com/garagebander/maru">https://github.com/garagebander/maru</a>.
-    <hr>
+    see codes in
+    <a href="https://github.com/garagebander/maru"
+      >https://github.com/garagebander/maru</a
+    >.
+    <hr />
     <table>
-        <tr>
-            <td>
-                <button onclick="man(0,0);" class="btn place" id="place11">・</button>
-            </td>
-            <td>
-                <button onclick="man(1,0);" class="btn place" id="place21">・</button>
-            </td>
-            <td>
-                <button onclick="man(2,0);" class="btn place" id="place31">・</button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button onclick="man(0,1);" class="btn place" id="place12">・</button>
-            </td>
-            <td>
-                <button onclick="man(1,1);" class="btn place" id="place22">・</button>
-            </td>
-            <td>
-                <button onclick="man(2,1);" class="btn place" id="place32">・</button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button onclick="man(0,2);" class="btn place" id="place13">・</button>
-            </td>
-            <td>
-                <button onclick="man(1,2);" class="btn place" id="place23">・</button>
-            </td>
-            <td>
-                <button onclick="man(2,2);" class="btn place" id="place33">・</button>
-            </td>
-        </tr>
+      <tr>
+        <td>
+          <button onclick="man(0,0);" class="btn place" id="place11">・</button>
+        </td>
+        <td>
+          <button onclick="man(1,0);" class="btn place" id="place21">・</button>
+        </td>
+        <td>
+          <button onclick="man(2,0);" class="btn place" id="place31">・</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button onclick="man(0,1);" class="btn place" id="place12">・</button>
+        </td>
+        <td>
+          <button onclick="man(1,1);" class="btn place" id="place22">・</button>
+        </td>
+        <td>
+          <button onclick="man(2,1);" class="btn place" id="place32">・</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button onclick="man(0,2);" class="btn place" id="place13">・</button>
+        </td>
+        <td>
+          <button onclick="man(1,2);" class="btn place" id="place23">・</button>
+        </td>
+        <td>
+          <button onclick="man(2,2);" class="btn place" id="place33">・</button>
+        </td>
+      </tr>
     </table>
-    <hr>
+    <hr />
     <button onclick="start();" class="btn btn-primary">Start</button>
-    <hr>
+    <hr />
     <button onclick="study();" class="study">Study</button>
     <button onclick="log_etable();" class="log">Log</button>
 
-    <br>
+    <br />
     <div id="message"></div>
-
-</body>
+  </body>
 </html>
